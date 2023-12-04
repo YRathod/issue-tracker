@@ -3,7 +3,7 @@ import '@radix-ui/themes/styles.css';
 import './theme-config.css';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import NavBar from './components/NavBar'
+import NavBar from './Components/NavBar'
 import { Theme, ThemePanel } from '@radix-ui/themes';
 
 const inter = Inter({ 
