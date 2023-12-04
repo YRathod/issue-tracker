@@ -22,23 +22,26 @@ const { register, control , handleSubmit, formState:{ errors}} = useForm<IssueFo
 const [isSubmitting, setSubmitting] = useState(false);
 const router = useRouter();
 const [error, setError] = useState('')
+
+const onSubmit = handleSubmit(async data =>{
+  try {
+    setSubmitting(true);
+    await axios.post('/api/issues', data)
+    router.push('/issues');
+  } catch (error) {
+    console.log(error);
+    setSubmitting(false);
+    setError('An Unexpected error ocurred');
+  }
+  })
+
   return (
     <div className='max-w-xl'>
       {error &&<Callout.Root className='mb-5' color='red'>
          <Callout.Text>{error}</Callout.Text>
       </Callout.Root>}
       <form className='space-y-3' 
-        onSubmit={handleSubmit(async data =>{
-          try {
-            setSubmitting(true);
-            await axios.post('/api/issues', data)
-            router.push('/issues');
-          } catch (error) {
-            console.log(error);
-            setSubmitting(false);
-            setError('An Unexpected error ocurred');
-          }
-          })}>
+        onSubmit={onSubmit}>
           <TextField.Root>
               <TextField.Input placeholder='Title'  {...register('title')}></TextField.Input>
           </TextField.Root>
