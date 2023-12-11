@@ -43,4 +43,8 @@ const IssuesPage = async () => {
   )
 }
 
+export const dynamic  = 'force-dynamic';
+
+//export const revalidate = 0; //revalidate every 0 sec
+
 export default IssuesPage
