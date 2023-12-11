@@ -1,11 +1,12 @@
 import React from 'react'
 import prisma from '@/prisma/client'
 import { notFound } from 'next/navigation'
-import { Card, Heading, Flex, Text } from '@radix-ui/themes'
+import { Card, Heading, Flex, Text, Grid, Box, Button } from '@radix-ui/themes'
 import IssueStatusBadge from '@/app/Components/IssueStatusBadge'
 import ReactMarkdown from 'react-markdown';
 import delay from 'delay'
-
+import { Pencil2Icon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 interface Props {
     params: {id: string}
 }
@@ -19,16 +20,24 @@ const IssueDetailPage = async ({params}: Props) => {
   delay(3000);
 
   return (
-    <div>
-        <Heading>{issue.title}</Heading>
-        <Flex gap="3" my="2">
-            <IssueStatusBadge status={issue.status}></IssueStatusBadge>
-            <Text>{issue.createdAt.toDateString()}</Text>
-        </Flex>
-        <Card className='prose' mt="4">
-          <ReactMarkdown>{issue.description}</ReactMarkdown>
-        </Card>
-    </div>
+    <Grid columns={{initial:"1", md: "2"}} gap="5">
+      <Box>
+          <Heading>{issue.title}</Heading>
+          <Flex gap="3" my="2">
+              <IssueStatusBadge status={issue.status}></IssueStatusBadge>
+              <Text>{issue.createdAt.toDateString()}</Text>
+          </Flex>
+          <Card className='prose' mt="4">
+            <ReactMarkdown>{issue.description}</ReactMarkdown>
+          </Card>
+      </Box>
+      <Box>
+        <Button>
+          <Pencil2Icon></Pencil2Icon>
+          <Link href={`/issues/${issue.id}/edit`}>Edit Issue</Link>
+        </Button>
+      </Box>
+    </Grid>
   )
 }
 
