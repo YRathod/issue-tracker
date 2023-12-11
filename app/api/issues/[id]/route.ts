@@ -4,9 +4,10 @@ import prisma from '@/prisma/client'
 
 export async function PATCH(
     request:  NextRequest,
-    params: {id: string} ) {
+    {params} : {params: {id: string}} ) {
         const body = await request.json();
         const validation = issueSchema.safeParse(body);
+        console.log(body);
 
         if(!validation.success) {
             return NextResponse.json(validation.error.format(), {status: 400});
@@ -16,6 +17,7 @@ export async function PATCH(
             where: { id: parseInt(params.id)}
         })
 
+        console.log('issue', issue)
         if(!issue){
             return NextResponse.json({error: 'Invalid Issue'}, {status: 404});
         }
