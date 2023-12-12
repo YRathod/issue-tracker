@@ -11,7 +11,7 @@ console.log(currentPath);
 
 const nav = [
                 {href:'/', label: 'Dashboard'},
-                {href:'/issues', label: 'Issues'}
+                {href:'/issues/list', label: 'Issues'}
             ]
   return (
     <div className="flex space-x-6 border-b mb-5 px-5 h-14 items-center">
