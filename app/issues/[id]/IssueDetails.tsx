@@ -4,6 +4,7 @@ import IssueStatusBadge from '@/app/Components/IssueStatusBadge'
 import ReactMarkdown from 'react-markdown';
 import { Issue } from '@prisma/client'
 
+
 const IssueDetails = ({issue}: {issue: Issue}) => {
   return (
     <>
